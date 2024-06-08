@@ -84,7 +84,7 @@ fn sorted(mut digest: [u8; 16]) -> [u8; 16] {
 /// Delegates the hash to a syscall if compiled for the solana runtime.
 #[cfg(feature = "solana")]
 #[inline(always)]
-fn hashv(digest: &[u8; 16], nonce: &[u8; 8]) -> [u8; 32] {
+pub fn hashv(digest: &[u8; 16], nonce: &[u8; 8]) -> [u8; 32] {
     solana_program::blake3::hashv(&[sorted(*digest).as_slice(), &nonce.as_slice()]).to_bytes()
 }
 
